@@ -46,9 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const typedRoleElement = document.getElementById('typed-role');
   const roles = [
     'Frontend Developer',
-    'React.js & Full-Stack Enthusiast',
-    'Machine Learning Practitioner',
-    'UI/UX & Creative Web Coder',
+    'Digital Marketing Enthusiast',
     'Computer Science Engineer'
   ];
 
@@ -161,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'project-qr-assistant': {
       title: 'QR Code-Based Intelligent In-Store Shopping Assistant',
       timeline: '2025 – 2026',
-      badge: 'Flagship System',
+      badge: 'Retail Tech',
       category: 'Full-Stack / Retail Tech',
       tech: ['React.js', 'Node.js', 'Supabase', 'QR Code API', 'HTML5', 'CSS3', 'REST API'],
       summary: 'Developing a comprehensive QR-based retail application to streamline in-store shopping workflows and assist customers in discovering products faster.',
@@ -171,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Real-time inventory and availability tracking powered by Supabase PostgreSQL backend.',
         'Responsive mobile-first interface optimized for fast in-store mobile browser usage.'
       ],
-      github: 'https://github.com/kirupakaranselvaraj',
+      github: 'https://github.com/kirupakaranselvaraj/Store-Shopping-Assistant',
       demo: 'https://kirupakaranportfolio.netlify.app/'
     },
     'project-url-shortener': {
@@ -187,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Custom slug creation, link expiration settings, and QR code generation for shortened links.',
         'High-performance MongoDB indexing for sub-millisecond redirection lookups.'
       ],
-      github: 'https://github.com/kirupakaranselvaraj',
+      github: 'https://github.com/kirupakaranselvaraj/URL-shortener-Web',
       demo: 'https://kirupakaranportfolio.netlify.app/'
     },
     'project-ecommerce-hyperlocal': {
@@ -203,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Interactive shopping cart, order placement workflow, and order status tracking.',
         'Clean responsive UI optimized across desktop and mobile devices.'
       ],
-      github: 'https://github.com/kirupakaranselvaraj',
+      github: 'https://github.com/kirupakaranselvaraj/Hyper-Local-Ecommerce-Platform',
       demo: 'https://kirupakaranportfolio.netlify.app/'
     },
     'project-digital-notice': {
@@ -219,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Fully responsive UI ensuring clear readability across smartphones, tablets, and campus kiosk monitors.',
         'Relational MySQL schema for persistent storage of notices, attachments, and audit timestamps.'
       ],
-      github: 'https://github.com/kirupakaranselvaraj',
+      github: 'https://github.com/kirupakaranselvaraj/SmartCampus-Digital-notice-board',
       demo: 'https://kirupakaranportfolio.netlify.app/'
     },
     'project-car-rental': {
@@ -235,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Booking history logging, invoice calculation, and payment status tracking.',
         'Secure MySQL database design managing vehicle attributes, bookings, and customer profiles.'
       ],
-      github: 'https://github.com/kirupakaranselvaraj',
+      github: 'https://github.com/kirupakaranselvaraj/Car-Rental-System',
       demo: 'https://kirupakaranportfolio.netlify.app/'
     },
     'project-heart-disease': {
@@ -251,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Implementation and comparative evaluation of Decision Tree and Logistic Regression models.',
         'Evaluation metrics analysis including precision, recall, ROC-AUC, and patient risk factor scoring.'
       ],
-      github: 'https://github.com/kirupakaranselvaraj',
+      github: 'https://github.com/kirupakaranselvaraj/kirupakaranselvaraj',
       demo: 'https://kirupakaranportfolio.netlify.app/'
     },
     'project-birthday-app': {
@@ -267,8 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'Cross-browser audio and multimedia playback synchronization.',
         'Ultra-lightweight zero-dependency architecture for instantaneous page loads.'
       ],
-      github: 'https://github.com/kirupakaranselvaraj',
-      demo: 'https://kirupakaranportfolio.netlify.app/'
+      github: 'https://github.com/kirupakaranselvaraj/Birthday-Gift',
+      demo: 'https://birthday-gift-o1o8.vercel.app'
     },
     'project-personal-portfolio': {
       title: 'Personal Portfolio Website (Monochrome Edition)',
@@ -283,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Dynamic project filter, modal inspection system, and integrated resume viewer.',
         '1-click contact copy buttons and responsive layout optimized for all screen sizes.'
       ],
-      github: 'https://github.com/kirupakaranselvaraj',
+      github: 'https://github.com/kirupakaranselvaraj/Portfolio',
       demo: 'https://kirupakaranportfolio.netlify.app/'
     }
   };
@@ -468,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactForm = document.getElementById('portfolio-contact-form');
   const submitBtn = document.getElementById('contact-submit-btn');
   const submitBtnText = document.getElementById('submit-btn-text');
-  const emailRecipient = 'kirupakaran.s151205@gmail.com';
+  const formEndpoint = 'https://formsubmit.co/ajax/c3d739d30c6e1e9add95accce26e7721';
 
   if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
@@ -484,8 +482,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Exact subject format: [Name sent message from portfolio]
-      const formattedSubject = `${name} sent message from portfolio ${subject ? '- ' + subject : ''}`.trim();
+      // Professional email heading: Msg from Portfolio: [Name] - [Subject]
+      const formattedSubject = `Msg from Portfolio: ${name}${subject ? ' - ' + subject : ''}`;
 
       // Update button state while sending
       if (submitBtn) {
@@ -494,7 +492,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const response = await fetch(`https://formsubmit.co/ajax/${emailRecipient}`, {
+        const response = await fetch(formEndpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -505,27 +503,29 @@ document.addEventListener('DOMContentLoaded', () => {
             _replyto: email,
             _template: 'table',
             _captcha: 'false',
-            _autoresponse: 'Thank you for reaching out to Kirupakaran! Your message from the portfolio website has been received.',
-            'Portfolio Source': '[This message was sent from your Portfolio Website]',
-            'Sender Name': name,
-            'Sender Email': email,
-            'Message Subject': subject || 'General Inquiry',
-            'Message Content': message
+            'Full Name': name,
+            'Email Address': email,
+            'Subject': subject || 'General Inquiry',
+            'Direct Message': message
           })
         });
 
         const data = await response.json().catch(() => ({}));
 
-        // Always show clean inline confirmation and reset form
-        showToast(`✓ Thank you ${name}! Your message has been sent to Kirupakaran's inbox.`);
-        if (submitBtnText) submitBtnText.textContent = '✓ Message Sent!';
-        contactForm.reset();
+        if (response.ok && (data.success === 'true' || data.success === true)) {
+          showToast(`✓ Thank you ${name}! Your message has been sent to Kirupakaran's Gmail.`);
+          if (submitBtnText) submitBtnText.textContent = '✓ Message Sent!';
+          contactForm.reset();
+        } else {
+          const errorMsg = data.message || 'Could not send message. Please check back shortly or email directly.';
+          showToast(`Notice: ${errorMsg}`);
+          if (submitBtnText) submitBtnText.textContent = 'Send Message';
+        }
 
       } catch (err) {
         console.warn('FormSubmit background response:', err);
-        showToast(`✓ Thank you ${name}! Your message has been sent to Kirupakaran.`);
-        if (submitBtnText) submitBtnText.textContent = '✓ Message Sent!';
-        contactForm.reset();
+        showToast(`Could not connect. Please email kirupakaran.s151205@gmail.com directly.`);
+        if (submitBtnText) submitBtnText.textContent = 'Send Message';
       } finally {
         setTimeout(() => {
           if (submitBtn) {

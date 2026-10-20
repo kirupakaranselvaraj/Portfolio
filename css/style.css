@@ -575,6 +575,7 @@ section {
   text-transform: uppercase;
   background: var(--grad-hero-name);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 35px rgba(255, 255, 255, 0.2);
   animation: fadeInUp 0.8s ease-out 0.1s both;
@@ -1692,48 +1693,116 @@ section {
 /* Resume Modal Specifics */
 .resume-modal-content {
   max-width: 820px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
-.resume-sheet {
-  background: #050508;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 2.5rem;
-  color: #ffffff;
-  font-family: var(--font-sans);
-}
-
-.resume-header {
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.resume-name {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -0.02em;
-}
-
-.resume-contact-inline {
+.resume-modal-actions {
   display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
   flex-wrap: wrap;
-  gap: 1rem;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-top: 0.5rem;
 }
 
-.resume-section-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #ffffff;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.25);
-  padding-bottom: 0.4rem;
-  margin: 1.5rem 0 1rem;
+.resume-sheet-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.resume-uploaded-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+/* Bulletproof Print Rules for Resume: Prints ONLY the uploaded resume on 1 sheet */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 5mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Completely hide the entire portfolio website */
+  .app-container,
+  #starfield-canvas,
+  .ambient-glow,
+  .ambient-glow-secondary,
+  #project-modal-overlay,
+  .toast-notification,
+  .modal-close-btn,
+  .modal-actions {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Show ONLY the resume modal and the uploaded resume image */
+  #resume-modal-overlay {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .resume-modal-content {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .resume-sheet-container {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    page-break-inside: avoid !important;
+  }
+
+  .resume-uploaded-image {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 280mm !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+    page-break-inside: avoid !important;
+  }
 }
 
 /* Toast Notifications */
@@ -1882,39 +1951,6 @@ section {
   }
 }
 
-/* Print Styles for Resume */
-@media print {
-  body {
-    background: #ffffff !important;
-    color: #000000 !important;
-  }
-  #starfield-canvas, .navbar, .ambient-glow, .ambient-glow-secondary, .hero-section, .skills-grid, .project-filters, .projects-grid, .contact-grid, .footer {
-    display: none !important;
-  }
-  .modal-overlay {
-    position: static;
-    background: #ffffff;
-    opacity: 1 !important;
-    visibility: visible !important;
-    padding: 0;
-  }
-  .modal-content {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border: none !important;
-    box-shadow: none !important;
-    max-width: 100% !important;
-    padding: 0 !important;
-  }
-  .modal-close-btn, .modal-actions {
-    display: none !important;
-  }
-  .resume-sheet {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border: none !important;
-  }
-}
 /* ==========================================================================
    COMPREHENSIVE LIGHT THEME COMPONENT STYLES
    ========================================================================== */
@@ -1964,6 +2000,7 @@ html[data-theme="light"] {
 [data-theme="light"] .hero-name {
   background: linear-gradient(180deg, #09090b 35%, #334155 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.08));
 }
@@ -2128,10 +2165,12 @@ html[data-theme="light"] {
   border-top-color: rgba(0, 0, 0, 0.08);
 }
 
-[data-theme="light"] .resume-modal-container {
+[data-theme="light"] .resume-modal-container,
+[data-theme="light"] .resume-sheet-container {
   background: #ffffff;
   border-color: rgba(0, 0, 0, 0.12);
   color: #09090b;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="light"] .mobile-nav-menu {
